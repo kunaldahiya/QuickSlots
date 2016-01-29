@@ -2,7 +2,7 @@
 
 /**
  * Restricted to dean level users, provides interface and back end routines to manage departments, faculty, batches and rooms
- * @author Avin E.M
+ * @author Avin E.M; Kunal Dahiya
  */
 
 require_once('functions.php');
@@ -75,7 +75,7 @@ require_once ('connect_db.php');
       <div class="elements">
         <form method="post" action="register.php">
           <input type="text" name="fullName" class="styled uInfo" required pattern=".{6,50}" title="6 to 50 characters" placeholder="Full Name" />
-          <input type="text" name="uName" class="styled username" required pattern="[^ ]{3,25}" title="3 to 25 characters without spaces" placeholder="Username" />
+          <input type="text" name="uName" class="styled username" required pattern="[^ ]{4,25}" title="4 to 25 characters without spaces" placeholder="Username" />
           <select  name="dept" class="stretch" data-placeholder="Choose Department..." required>
             <option label="Choose Department..."></option>
             <?php

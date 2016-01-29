@@ -2,7 +2,7 @@
 
 /**
  * Contains various common helper routines used across most files
- * @author Avin E.M
+ * @author Avin E.M; Kunal Dahiya
  */
 
 ini_set('session.gc_maxlifetime', 24*3600);

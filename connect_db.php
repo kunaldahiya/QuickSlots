@@ -2,7 +2,7 @@
 
 /**
  * Initiates database connections
- * @author Avin E.M
+ * @author Avin E.M; Kunal Dahiya
  */
 
 if (file_exists('config.php')) {

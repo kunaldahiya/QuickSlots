@@ -2,7 +2,7 @@
 
 /**
  * Back end routines to add/delete courses, invoked by faculty.php
- * @author Avin E.M
+ * @author Avin E.M; Kunal Dahiya
  */
 
 require_once('functions.php');

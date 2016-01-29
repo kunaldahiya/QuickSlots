@@ -2,7 +2,7 @@
 
 /**
  * Homepage of dean level users, provides interface and back end routines to edit and save global settings
- * @author Avin E.M
+ * @author Avin E.M; Kunal Dahiya
  */
 
 require_once('functions.php');

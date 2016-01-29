@@ -1,9 +1,6 @@
 /**
  * Client side script to render timetable grids
- */
-
-/**
- * Set colors to be used for course slots in the grid
+ * Avin EM; Kunal Dahiya
  */
 var colors=
 [
@@ -17,73 +14,73 @@ var colors=
 
     ['#fefa9a', '#C99B08']
 ]
-
-/**
- * colourCourses()
- *
- * Colors courses display in the right pane with the set of predifined colors 
- */
-function colorCourses()
-{
-    $(".course").each(function(i){
-        $(this).css('background',colors[i%colors.length][0]);
-    })
+/*Hard coded
+To DO : Automate This*/
+function other(i){
+	i = parseInt(i)
+	if(i==0){
+		return "10:00 AM";
+	} else if(i==1){
+		return "11:00 AM";
+	}else if(i==2){
+		return "12:00 PM";
+	}else if(i==3){
+		return "01:00 PM";
+	}else if(i==4){
+		return "02:30 PM";
+	}else if(i==5){
+		return "04:00 PM";
+	}else if(i==6){
+		return "05:30 PM";
+	}else if(i==7){
+		return "07:00 PM";
+	}else if(i==8){
+	return "08:30 PM";
+	}
 }
 
-/**
- * timeAdd()
- *
- * Takes as input a string 't' of the form (HH:mm:AM/PM),
- * and duration 'dur' in minutes. Returns a string of the
- * same form as 't' with 'dur' added to it
- */
+
 function timeAdd(t,dur)
 {
-    var hr = parseInt(t.substr(0,2),10),
-        min = parseInt(t.substr(3,2),10),
+    var hr = parseInt(t.substr(0,2)),
+        min = parseInt(t.substr(3,2)),
         mer = t.substr(-2),
-        h = Math.floor(dur/60);
+        h = parseInt(dur/60);
     min += dur - h*60;
     hr +=h;
-    h = Math.floor(min/60);
+    h = parseInt(min/60);
     hr +=h;
     min -= h*60;
-    hr = (hr - 1) % 12 + 1;
     if(hr>=12 && (h || dur>=60) )
     {
+        hr = (hr + 11) % 12 + 1;
         mer=(mer=="PM")?"AM":"PM";
     }  
     return ("0"+hr).substr(-2)+":"+("0"+min).substr(-2)+" "+mer;
 }
 
-/**
- * drawGrid()
- *
- * Draws a grid on the element #timetable with the specified parameters
- *
- */
-function drawGrid(not_empty,numSlots,numDays,slotDur,start_time)
+function drawGrid(not_empty,slots,numDays,dur,t)
 {
     var cell_color="";
-    if (!numSlots)
+    if (!slots)
     {
-      numSlots = parseInt($("#numSlots").val()),
+      slots = parseInt($("#numSlots").val()),
           numDays  = parseInt($("#numDays").val()),
-          slotDur   = parseInt($("#duration").val()),
-          start_time     = $("#start_hr").val() + ":" + $("#start_min").val()
+          dur   = parseInt($("#duration").val()),
+          t     = $("#start_hr").val() + ":" + $("#start_min").val()
                   + " " + $("#start_mer").val();
       cell_color = "blue";
     }
     var table = $("#timetable"),
         row=$("<div>").addClass('row');
         row.append($("<div>").addClass('cell blank'));
-    if(!numSlots || !numDays)
+    if(!slots || !numDays)
     {
         $("#legend").hide();
         $("#updateButton").hide();
         msg = 'There are no timetables to display';
         if(not_empty)
-          msg ='Add one or more numSlots and days to display the timetable'
+          msg ='Add one or more slots and days to display the timetable'
         table.html('<br><br><div style="font-weight:bold;text-align:center">' + msg + '</div>');
         table.css('height','100px');
         return;
@@ -95,11 +92,12 @@ function drawGrid(not_empty,numSlots,numDays,slotDur,start_time)
         $("#legend").show();
     }
     table.html('');
-    for(i=0;i<numSlots;i++)
+    for(i=0;i<slots;i++)
     {
-        var content = start_time+'<br>−<br>';
-        start_time=timeAdd(start_time,slotDur);
-        content+=start_time;
+        var content = t+'<br>−<br>';
+        //t=timeAdd(t,dur);
+        t = other(i);
+		content+=t;
         row.append($("<div>").addClass('cell time').html(content));            
     }
     table.append(row);
@@ -108,7 +106,7 @@ function drawGrid(not_empty,numSlots,numDays,slotDur,start_time)
     {
         row = $("<div>").addClass('row');
         row.append($("<div>").addClass('cell day').html(days[d]));
-        for (i=0; i < numSlots; i++)
+        for (i=0; i < slots; i++)
             row.append($('<div id="'+ (d+1)+"_"+(i+1) +'">').addClass("cell "+cell_color)); 
         table.append(row);
     }
@@ -118,5 +116,11 @@ function drawGrid(not_empty,numSlots,numDays,slotDur,start_time)
             $(cell).removeClass('blue').addClass('disabled');
         else
             $(this).remove();
+    })
+}
+function colorCourses()
+{
+    $(".course").each(function(i){
+        $(this).css('background',colors[i%colors.length][0]);
     })
 }

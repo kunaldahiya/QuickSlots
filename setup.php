@@ -2,7 +2,7 @@
 
 /**
  * Provides interface for initial system setup and dean account registration.
- * @author Avin E.M
+ * @author Avin E.M; Kunal Dahiya
  */
 
 if (file_exists('config.php'))
@@ -128,7 +128,7 @@ if($config)
       <div class="title">To start using the system,<br /> create an admin/dean account...</div>
       <div class="elements">
         <form method="post" action="register.php?action=addUser">
-          <input type="text" name="uName" class="styled username" required pattern="[^ ]{3,25}" title="3 to 25 characters without spaces" placeholder="Username" />
+          <input type="text" name="uName" class="styled username" required pattern="[^ ]{4,25}" title="4 to 25 characters without spaces" placeholder="Username" />
           <input type="text" name="fullName" class="styled uInfo" required pattern=".{6,50}" title="6 to 50 characters" placeholder="Full Name" />
           <select name="dept" class="stretch" data-placeholder="Choose Department..." required>
             <option label="Choose Department..."></option>

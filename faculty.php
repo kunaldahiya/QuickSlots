@@ -2,7 +2,7 @@
 
 /**
  * Homepage of HOD and faculty level users, provides interfaces to add/delete courses
- * @author Avin E.M
+ * @author Avin E.M; Kunal Dahiya
  */
 
 require_once('functions.php');
